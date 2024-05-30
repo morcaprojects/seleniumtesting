@@ -45,4 +45,4 @@ def scrape_cnn_articles():
 
 # Usage
 df = scrape_cnn_articles()
-print(df)
+st.markdown(df.head())
