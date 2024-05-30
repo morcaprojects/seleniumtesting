@@ -16,6 +16,7 @@ with st.echo():
     from selenium.webdriver.chrome.service import Service
     from webdriver_manager.chrome import ChromeDriverManager
     from webdriver_manager.core.os_manager import ChromeType
+    from selenium.webdriver.common.by import By
 
     @st.cache_resource
     def get_driver():
@@ -31,9 +32,9 @@ with st.echo():
     options.add_argument("--headless")
 
     driver = get_driver()
-    browser = driver.get("https://edition.cnn.com/")
+    driver.get("https://edition.cnn.com/")
 
-    matches = browser.find_elements_by_xpath("//div[@data-open-link]")
+    matches = driver.find_elements(by=By.XPATH, value="//div[@data-open-link]")
     links = []
 
     for i in range(len(matches)):
