@@ -23,12 +23,13 @@ with st.echo():
             service=Service(
                 ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
             ),
-            options=options,
+            options=chrome_options,
         )
 
-    options = Options()
-    options.add_argument("--disable-gpu")
-    options.add_argument("--headless")
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--window-size=1920x1080')
+    chrome_options.add_argument('--disable-gpu')
 
     driver = get_driver()
     driver.get("https://edition.cnn.com/")
