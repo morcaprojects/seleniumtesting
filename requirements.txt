@@ -3,3 +3,4 @@ streamlit
 seleniumbase
 webdriver-manager
 requests
+bs4
