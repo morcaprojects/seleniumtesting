@@ -37,5 +37,5 @@ def scrape_cnn_articles():
 
 # Usage
 df = scrape_cnn_articles()
-st.markddown(df.head())
+st.markdown(df.head())
 
