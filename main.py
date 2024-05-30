@@ -9,8 +9,9 @@ def scrape_cnn_articles():
     # Fetch the homepage
     response = requests.get(base_url)
     soup = BeautifulSoup(response.content, 'html.parser')
+    st.markdown(soup)
 
-    # Find article links
+    """# Find article links
     matches = soup.find_all('div', attrs={'data-open-link': True})
     links = [base_url + match['data-open-link'] for match in matches if match.get('data-open-link')]
 
@@ -33,8 +34,8 @@ def scrape_cnn_articles():
         # Append data to DataFrame
         df.loc[len(df)] = [link, headline, text]
 
-    return df
+    return df"""
 
 # Usage
-df = scrape_cnn_articles()
-print(df)
+scrape_cnn_articles()
+
