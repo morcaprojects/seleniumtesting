@@ -33,4 +33,12 @@ with st.echo():
     driver = get_driver()
     driver.get("https://edition.cnn.com/")
 
-    st.code(driver.page_source)
+    matches = driver.find_elements_by_xpath("//div[@data-open-link]")
+    links = []
+
+    for i in range(len(matches)):
+      links.append(web + matches[i].get_attribute('data-open-link'))
+      st.markdown(links[i])
+
+    
+
