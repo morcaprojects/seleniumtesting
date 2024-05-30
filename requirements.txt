@@ -2,3 +2,4 @@ selenium
 streamlit
 seleniumbase
 webdriver-manager
+requests
