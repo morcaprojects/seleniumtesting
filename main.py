@@ -1,45 +1,31 @@
+"""Scrapes quotes from the given url.
+
+The url is 'https://quotes.toscrape.com/'.
+"""
+
 import streamlit as st
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service as ChromeService
+import pandas as pd
 
-"""
-## Web scraping on Streamlit Cloud with Selenium
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--headless')
+chrome_options.add_argument('--window-size=1920x1080')
+chrome_options.add_argument('--disable-gpu')
 
-[![Source](https://img.shields.io/badge/View-Source-<COLOR>.svg)](https://github.com/snehankekre/streamlit-selenium-chrome/)
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
 
-This is a minimal, reproducible example of how to scrape the web with Selenium and Chrome on Streamlit's Community Cloud.
+url = 'https://quotes.toscrape.com/'
+driver.get(url)
 
-Fork this repo, and edit `/streamlit_app.py` to customize this app to your heart's desire. :heart:
-"""
+quotes = driver.find_elements('xpath', '//span[@class="text"]')
 
-with st.echo():
-    from selenium import webdriver
-    from selenium.webdriver.chrome.options import Options
-    from selenium.webdriver.chrome.service import Service
-    from webdriver_manager.chrome import ChromeDriverManager
-    from webdriver_manager.core.os_manager import ChromeType
-
-    @st.cache_resource
-    def get_driver():
-        return webdriver.Chrome(
-            service=Service(
-                ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-            ),
-            options=chrome_options,
-        )
-
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--window-size=1920x1080')
-    chrome_options.add_argument('--disable-gpu')
-
-    driver = get_driver()
-    driver.get("https://edition.cnn.com/")
-
-    matches = driver.find_elements_by_xpath("//div[@data-open-link]")
-    links = []
-
-    for i in range(len(matches)):
-      links.append(web + matches[i].get_attribute('data-open-link'))
-      st.markdown(links[i])
-
+data = []
+for q in quotes:
+    data.append(q.text)
     
+driver.quit()
 
+df = pd.DataFrame(data, columns=['Quotes'])
+st.dataframe(df)
