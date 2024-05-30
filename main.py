@@ -35,6 +35,7 @@ with st.echo():
     driver.get("https://edition.cnn.com/")
 
     matches = driver.find_elements(by=By.XPATH, value="//div[@data-open-link]")
+    st.code(matches)
     links = []
 
     for i in range(len(matches)):
