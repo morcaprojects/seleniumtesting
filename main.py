@@ -30,6 +30,6 @@ with st.echo():
     links = []
 
     for i in range(len(matches)):
-    links.append(web + matches[i].get_attribute('data-open-link'))
-    st.markdown(links[i])
+       links.append(web + matches[i].get_attribute('data-open-link'))
+       st.markdown(links[i])
     
