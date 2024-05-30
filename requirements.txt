@@ -1,0 +1,4 @@
+transformers
+nltk
+seleniumbase
+webdriver-manager
