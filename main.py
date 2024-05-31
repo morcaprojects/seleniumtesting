@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+from scraping import scrape_trt_news, scrape_cnn_articles
 
 def scrape_cnn_articles():
     # Base URL
